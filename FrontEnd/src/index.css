@@ -1,0 +1,28 @@
+
+@import "tailwindcss";
+
+.nav-link {
+  position: relative;
+  font-weight: 500;
+  color: #374151; /* gray-700 */
+  transition: color 0.3s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 2px;
+  background-color: #0369A1; /* blue-600 */
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #0369A1;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
