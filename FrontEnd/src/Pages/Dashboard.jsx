@@ -67,40 +67,6 @@ function Dashboard() {
   },
 ];
 
-  const properties_sell = [
-  {
-    title: "Luxury Villa in Beverly Hills",
-    location: "Delhi",
-    price: "₹ 4,500,000",
-    image: "/images/sell1.png",
-  },
-  {
-    title: "Modern Apartment",
-    location: "Mumbai",
-    price: "₹ 2,800,000",
-    image: "/images/sell7.png",
-  },
-  {
-    title: "Beachside Bungalow",
-    location: "Goa",
-    price: "₹ 6,200,000",
-    image: "/images/sell3.png",
-  },
-  {
-    title: "Smart Home Villa",
-    location: "Bangalore",
-    price: "₹ 3,900,000",
-    image: "/images/sell4.png",
-  },
-  {
-    title: "Premium Penthouse",
-    location: "Pune",
-    price: "₹ 5,100,000",
-    image: "/images/sell5.png",
-  },
-];
-
-
   const properties_rent = [
   {
     title: "Modern Apartment",
@@ -175,7 +141,7 @@ const title = "Homes That Define Modern Living";
             </motion.h1>
           </AnimatePresence>
 
-          <p className="text-gray-200 mb-6 text-lg">
+          <p className="text-gray-100 mb-6 text-lg">
             Explore premium properties — buy, rent, or sell with confidence.
           </p>
 
@@ -235,7 +201,7 @@ const title = "Homes That Define Modern Living";
             </motion.p>
       </div>
       <div className=" p-8 rounded-b-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8  bg-linear-to-r from-blue-200 via-cyan-200 to-yellow-50 animate-gradient">
-        {properties_sell.map((property, index) => (
+        {properties_buy.map((property, index) => (
           <div
             key={index}
             className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"

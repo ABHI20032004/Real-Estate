@@ -56,6 +56,24 @@ const properties = [
     price: "₹ 3,200,000",
     image: "/images/buy9.png",
   },
+  {
+    title: "Independent House",
+    location: "Bihar",
+    price: "₹ 3,200,000",
+    image: "/images/buy10.png",
+  },
+  {
+    title: "Independent House",
+    location: "Bihar",
+    price: "₹ 3,200,000",
+    image: "/images/buy11.png",
+  },
+  {
+    title: "Independent House",
+    location: "Bihar",
+    price: "₹ 3,200,000",
+    image: "/images/buy12.png",
+  },  
 ];
 const title = "Explore Our Exclusive Properties for Sale";
 
