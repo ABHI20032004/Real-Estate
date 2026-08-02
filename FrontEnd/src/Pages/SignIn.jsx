@@ -7,7 +7,7 @@ import {
   signInfailure,
   clearError,
 } from "../redux/user/userSlice.js";
-import OAuth from "../Components/OAuth.jsx";
+// import OAuth from "../Components/OAuth.jsx";
 
 function SignIn() {
   const [formData, setFormData] = useState({
@@ -123,7 +123,7 @@ function SignIn() {
           </button>
 
           {/* Google OAuth */}
-          <OAuth />
+          {/* <OAuth /> */}
         </form>
 
         {/* Footer */}

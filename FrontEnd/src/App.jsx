@@ -9,6 +9,9 @@ import Rent from "./Pages/Rent"
 import Sell from "./Pages/Sell"
 import SignUp from "./Pages/SignUp"
 import PrivateRoute from "./Components/PrivateRoute"
+import BuyPropertyDetails from "./Pages/BuyPropertyDetails"
+import RentPropertyDetails from "./Pages/RentPropertyDetails"
+
 
 
 
@@ -27,6 +30,8 @@ function App() {
             <Route path="/buy" element={<Buy/>}/>
             <Route path="/rent" element={<Rent/>}/>
             <Route path="/sell" element={<Sell/>}/>
+            <Route path="/buy-property/:id" element={<BuyPropertyDetails />} />
+            <Route path="/rent-property/:id" element={<RentPropertyDetails />} /> 
 
             <Route element={<PrivateRoute/>}>
               <Route path="/profile" element={<Profile/>} />

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import OAuth from "../Components/OAuth";
+// import OAuth from "../Components/OAuth";
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -148,7 +148,7 @@ function SignUp() {
           >
             {loading ? "Signing up..." : "Sign Up"}
           </button>
-          <OAuth/>
+          {/* <OAuth/> */}
         </form>
 
         {/* Footer */}
