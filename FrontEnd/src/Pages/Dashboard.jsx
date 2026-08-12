@@ -197,7 +197,7 @@ const title = "Homes That Define Modern Living";
                 ease: "linear",
               }}
             >
-              Properties for Sell &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Properties for Sell &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Properties for Sell
+              Properties for Sell &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;Properties for Sell
             </motion.p>
       </div>
       <div className=" p-8 rounded-b-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8  bg-linear-to-r from-blue-200 via-cyan-200 to-yellow-50 animate-gradient">
@@ -207,7 +207,7 @@ const title = "Homes That Define Modern Living";
             className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
           >
             {/* IMAGE DIV */}
-            <a href="/buy">
+            <Link to="/buy">
             <div className="h-78 w-full">
               <img
                 src={property.image}
@@ -215,7 +215,7 @@ const title = "Homes That Define Modern Living";
                 className="w-full h-full object-cover cursor-pointer"
               />
             </div>
-            </a>
+            </Link>
 
             {/* DETAILS DIV */}
             <div className="pl-4">
@@ -264,7 +264,7 @@ const title = "Homes That Define Modern Living";
                 ease: "linear",
               }}
             >
-              Properties for Rent  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Properties for Rent  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Properties for Rent
+              Properties for Rent &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;Properties for Rent
             </motion.p>
       </div>
       <div className="mb-5 p-8 rounded-b-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8  bg-linear-to-r from-blue-200 via-cyan-200 to-yellow500 ">
@@ -274,7 +274,7 @@ const title = "Homes That Define Modern Living";
             className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
           >
             {/* IMAGE DIV */}
-            <a href="/rent">
+            <Link to="/rent">
             <div className="h-78 w-full">
               <img
                 src={property.image}
@@ -282,7 +282,7 @@ const title = "Homes That Define Modern Living";
                 className="w-full h-full object-cover cursor-pointer"
               />
             </div>
-            </a>
+            </Link>
 
             {/* DETAILS DIV */}
             <div className="pl-4">
