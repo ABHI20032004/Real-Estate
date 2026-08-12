@@ -52,7 +52,7 @@ function PostProperty() {
 
     try {
       const response = await fetch(
-        "${import.meta.env.VITE_API_URL}/BackEnd/properties",
+        `${import.meta.env.VITE_API_URL}/BackEnd/properties`,
         {
           method: "POST",
           headers: {
