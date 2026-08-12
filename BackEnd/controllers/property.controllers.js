@@ -84,9 +84,10 @@ export const getPropertyById = async (req, res) => {
 // GET All Properties
 export const getMyProperties = async (req, res) => {
   try {
-    const properties = await Property.find();
 
-    console.log("TOTAL PROPERTIES:", properties.length);
+    const owner = req.query.owner;
+
+    const properties = await Property.find({ owner : owner });
 
     res.status(200).json(properties);
   } catch (error) {
