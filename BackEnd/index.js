@@ -10,12 +10,18 @@ import propertyRouter from "./routes/property.routes.js";
 dotenv.config();
 
 const app = express();
+
 app.use(
   cors({
-    origin: "http://localhost:5175",
+    origin: [
+      "http://localhost:5173",
+      "http://localhost:5175",
+      "https://real-estate-tau-two-65.vercel.app",
+    ],
     credentials: true,
   })
 );
+
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ limit: "10mb", extended: true }));
 
