@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { useSelector } from "react-redux";
 
 const title = "Post Your Property";
 
 function PostProperty() {
+  const { currentUser } = useSelector((state) => state.user);
   const [showForm, setShowForm] = useState(false);
 
   const [form, setForm] = useState({
@@ -12,7 +14,7 @@ function PostProperty() {
     location: "",
     price: "",
     image: "",
-    owner: "",
+    owner: currentUser?.username || "",
     phone: "",
     email: "",
     bedrooms: "",
@@ -166,15 +168,22 @@ function PostProperty() {
               required
             />
 
+
+          <div className="flex items-center gap-2">
+            <label className="w-20 border p-2 rounded text-lg font-medium text-sky-700">
+              Owner
+            </label> 
             <input
               type="text"
               name="owner"
               placeholder="Owner Name"
-              value={form.owner}
+              value={currentUser.username}
+              readOnly
               onChange={handleChange}
               className="w-full border p-2 rounded"
               required
             />
+          </div>
 
             <input
               type="tel"
@@ -240,14 +249,20 @@ function PostProperty() {
               type="file"
               accept="image/*"
               onChange={handleImage}
-              className="w-full border p-2 rounded"
+               className="w-full border border-gray-300 rounded-lg p-2
+                text-gray-600 bg-white
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-md file:border-0
+                file:bg-blue-400 file:text-white
+                file:font-medium file:cursor-pointer
+                hover:file:bg-blue-500"
               required
             />
 
-            <div className="flex gap-4">
+            <div className="flex gap-4 pt-10">
               <button
                 type="submit"
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
+                className="flex-1 bg-sky-700 hover:bg-sky-800 text-white py-2 rounded"
               >
                 Post Property
               </button>
@@ -255,7 +270,7 @@ function PostProperty() {
               <button
                 type="button"
                 onClick={() => setShowForm(false)}
-                className="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 rounded"
+                className="flex-1 bg-gray-400 hover:bg-gray-500 text-white py-2 rounded"
               >
                 Cancel
               </button>
