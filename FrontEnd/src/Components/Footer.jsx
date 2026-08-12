@@ -1,9 +1,9 @@
 import React from "react";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone ,Github} from "lucide-react";
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-12 pb-6 mt-0">
+    <footer className="bg-gray-600 text-gray-300 pt-12 pb-6 mt-0">
       <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-10 border-b border-gray-700 pb-10">
         {/* Brand / Logo */}
         <div>
@@ -19,16 +19,16 @@ function Footer() {
               href="#"
               className="p-2 bg-gray-800 hover:bg-blue-600 rounded-full transition-all duration-300"
             >
-              <Facebook className="text-white" size={20} />
-            </a>
-            <a
-              href="#"
-              className="p-2 bg-gray-800 hover:bg-pink-500 rounded-full transition-all duration-300"
-            >
               <Instagram className="text-white" size={20} />
             </a>
             <a
-              href="#"
+              href="https://github.com/ABHI20032004/Real-Estate"
+              className="p-2 bg-gray-800 hover:bg-pink-500 rounded-full transition-all duration-300"
+            >
+              <Github className="text-white" size={20} />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/abhishek-raj3015"
               className="p-2 bg-gray-800 hover:bg-blue-500 rounded-full transition-all duration-300"
             >
               <Linkedin className="text-white" size={20} />
@@ -40,11 +40,11 @@ function Footer() {
         <div>
           <h3 className="text-xl font-semibold text-white mb-4">Quick Links</h3>
           <ul className="space-y-2">
-            <li><a href="/" className="hover:text-white transition">Home</a></li>
-            <li><a href="/buy" className="hover:text-white transition">Buy</a></li>
-            <li><a href="/rent" className="hover:text-white transition">Rent</a></li>
-            <li><a href="sell" className="hover:text-white transition">Sell</a></li>
-            <li><a href="/buy" className="hover:text-white transition">Post Property</a></li>
+            <li><a href="/" className="hover:text-blue-500 transition">Home</a></li>
+            <li><a href="/buy" className="hover:text-blue-500 transition">Buy</a></li>
+            <li><a href="/rent" className="hover:text-blue-500 transition">Rent</a></li>
+            <li><a href="/my-properties" className="hover:text-blue-500 transition">My Property</a></li>
+            <li><a href="/post-property" className="hover:text-blue-500 transition">Post Property</a></li>
           </ul>
         </div>
 
@@ -52,10 +52,10 @@ function Footer() {
         <div>
           <h3 className="text-xl font-semibold text-white mb-4">Company</h3>
           <ul className="space-y-2">
-            <li><a href="#" className="hover:text-white transition">About Us</a></li>
-            <li><a href="#" className="hover:text-white transition">Careers</a></li>
-            <li><a href="#" className="hover:text-white transition">Privacy Policy</a></li>
-            <li><a href="#" className="hover:text-white transition">Terms & Conditions</a></li>
+            <li><a href="#" className="hover:text-blue-500 transition">About Us</a></li>
+            <li><a href="#" className="hover:text-blue-500 transition">Careers</a></li>
+            <li><a href="#" className="hover:text-blue-500 transition">Privacy Policy</a></li>
+            <li><a href="#" className="hover:text-blue-500 transition">Terms & Conditions</a></li>
           </ul>
         </div>
 
@@ -80,7 +80,7 @@ function Footer() {
       </div>
 
       {/* Bottom Section */}
-      <div className="text-center text-gray-500 text-sm mt-8">
+      <div className="text-center text-white-500 text-sm mt-8">
         © {new Date().getFullYear()} DreamHome. All rights reserved.
       </div>
     </footer>

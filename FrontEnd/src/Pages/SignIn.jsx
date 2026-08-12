@@ -19,7 +19,7 @@ function SignIn() {
   const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
-  // ✅ Clear stale Redux error on page load
+  // Clear stale Redux error on page load
   useEffect(() => {
     dispatch(clearError());
   }, [dispatch]);
@@ -34,7 +34,7 @@ function SignIn() {
     try {
       dispatch(signInstart());
 
-      const res = await fetch("/BackEnd/auth/signin", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/BackEnd/auth/signin`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -122,8 +122,6 @@ function SignIn() {
             {loading ? "Signing In..." : "Sign In"}
           </button>
 
-          {/* Google OAuth */}
-          {/* <OAuth /> */}
         </form>
 
         {/* Footer */}

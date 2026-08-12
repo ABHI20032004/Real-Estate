@@ -1,24 +1,55 @@
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { useParams } from "react-router-dom";
 import { properties } from "../data/buy_properties";
 
 function BuyPropertyDetails() {
-  const { id } = useParams();
 
-  const property = properties.find(
+  const { id } = useParams();
+  
+  const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+  const staticProperty = properties.find(
     (item) => item.id === Number(id)
   );
 
+  if (staticProperty) {
+    setProperty(staticProperty);
+    setLoading(false);
+    return;
+  }
+
+  fetch(`${import.meta.env.VITE_API_URL}/BackEnd/properties/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setProperty(data.property); // because backend returns { success, property }
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false);
+    });
+}, [id]);
+
+  if (loading) {
+  return (
+    <div className="text-center text-2xl mt-20">
+      Loading...
+    </div>
+  );
+ }
+
   if (!property) {
     return (
-      <h1 className="text-center text-3xl mt-20">
+      <h1 className="text-center text-3xl pt-15 mt-20 mb-20">
         Property Not Found
       </h1>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto py-24 px-6">
+    <div className=" mx-auto py-24 px-6 bg-linear-to-r from-blue-200 via-cyan-200 to-yellow-50">
 
       <img
         src={property.image}
@@ -41,7 +72,7 @@ function BuyPropertyDetails() {
       <div className="grid grid-cols-3 gap-6 mt-8 text-lg">
         <p>🛏 {property.bedrooms} Bedrooms</p>
         <p>🛁 {property.bathrooms} Bathrooms</p>
-        <p>📐 {property.area}</p>
+        <p>📐 {property.area} sqft</p>
       </div>
 
       <p className="mt-8 text-gray-700 leading-8">

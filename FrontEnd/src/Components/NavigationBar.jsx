@@ -41,7 +41,7 @@ function NavigationBar() {
   return (
     <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-150">
       <div className="flex justify-between items-center px-6 md:px-10 py-3">
-        {/* 🏠 Logo */}
+        {/* Logo */}
         <Link
           to="/"
           className="text-4xl font-serif font-bold text-sky-800 hover:text-sky-700 transition-colors duration-300"
@@ -49,7 +49,7 @@ function NavigationBar() {
           The Dreams
         </Link>
 
-        {/* 🍔 Mobile Menu Button */}
+        {/* Mobile Menu Button */}
         <button
           className="md:hidden p-2 rounded-md hover:bg-blue-100 transition"
           onClick={() => setIsOpen(!isOpen)}
@@ -57,7 +57,7 @@ function NavigationBar() {
           {isOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
 
-        {/* 🧭 Desktop Menu */}
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           <Link to="/" className="nav-link">
             Dashboard
@@ -71,13 +71,13 @@ function NavigationBar() {
             Rent
           </Link>
 
-          <Link to="/sell" className="nav-link">
-            Sell
+          <Link to="/my-properties" className="nav-link">
+            My Property
           </Link>
 
-          {/* 🏡 Post Property Button */}
+          {/* Post Property Button */}
           <Link
-            to={currentUser ? "/sell" : "/signup"}
+            to={currentUser ? "/post-property" : "/signup"}
             className="relative bg-sky-800 text-white px-5 py-2 rounded-lg font-semibold shadow-sm
                       transition-all duration-300 ease-in-out hover:bg-sky-700 hover:shadow-xl hover:scale-105 active:scale-95"
           >
@@ -86,16 +86,20 @@ function NavigationBar() {
 
               
 
-          {/* 👤 User Icon + Login */}
+          {/* User Icon + Login */}
           {currentUser ? (
             <div className="relative" ref={dropdownRef}>
               {/* Avatar */}
               <img
-                src={"/image.png"}
-                alt="profile"
-                onClick={() => setProfileOpen(!profileOpen)}
-                className="w-10 h-10 rounded-full cursor-pointer border border-sky-700 hover:scale-110 transition"
-              />
+                    src={
+                      currentUser.photo?.startsWith("data:")
+                        ? currentUser.photo
+                        : `/${currentUser.photo || "image.png"}`
+                    }
+                    alt="profile"
+                    onClick={() => setProfileOpen(!profileOpen)}
+                    className="w-10 h-10 rounded-full cursor-pointer border border-sky-700 hover:scale-110 transition object-cover"
+                  />
 
               {/* Dropdown */}
               {profileOpen && (
@@ -125,7 +129,7 @@ function NavigationBar() {
                           setProfileOpen(false);
                         }}
                         className="mt-4 w-full border border-gray-300 rounded-md py-2 text-sm font-medium
-                                  hover:bg-gray-100 transition"
+                                  hover:bg-gray-300 hover:font-bold transition cursor-pointer"
                       >
                         Manage your Account
                       </button>
@@ -133,28 +137,40 @@ function NavigationBar() {
 
                     {/* Menu Items */}
                     <div className="py-3 px-6 space-y-3 text-sm text-gray-700">
-                      <button className="w-full text-left hover:text-black transition">
-                        Organizations
+
+                      {/* My Properties */}
+                      <button
+                        onClick={() => {
+                          navigate("/my-properties");
+                          setProfileOpen(false);
+                        }}
+                        className="w-full text-left font-bold hover:text-sky-700 hover:scale-115 transition cursor-pointer"
+                      >
+                        🏠 My Properties
                       </button>
-                      <button className="w-full text-left hover:text-black transition">
-                        All Clusters
-                      </button>
-                      <button className="w-full text-left hover:text-black transition">
-                        Invitations
-                      </button>
-                      <button className="w-full text-left hover:text-black transition flex items-center gap-1">
-                        Send Feedback
-                        <span className="text-sky-700 text-xs">↗</span>
-                      </button>
+
                     </div>
 
                     {/* Logout */}
-                    <div className="border-t-2  text-gray-200 shadow-5xl px-6 py-3">
+                                  
+                    <div className="border-t px-6 py-3">
                       <button
                         onClick={handleLogout}
-                        className="w-full text-left text-sm font-medium text-red-600 hover:scale-105 transition"
+                        className="w-full flex items-center gap-3 text-left group cursor-pointer"
                       >
-                        LogOut
+                        <div
+                          className="w-10 h-10 flex items-center justify-center rounded-full
+                                    bg-red-100 group-hover:bg-red-600 transition"
+                        >
+                          <LogOut
+                            size={22}
+                            className="text-red-600 group-hover:text-white transition"
+                          />
+                        </div>
+
+                        <span className="font-medium text-gray-700 group-hover:text-red-600 transition">
+                          Logout
+                        </span>
                       </button>
                     </div>
                   </div>
@@ -175,7 +191,7 @@ function NavigationBar() {
         </div>
       </div>
 
-      {/* 📱 Mobile Dropdown Menu */}
+      {/* Mobile Dropdown Menu */}
       {isOpen && (
         <div className="md:hidden bg-white border-t shadow-lg animate-fadeIn z-140">
           <div className="flex flex-col gap-6 px-6 py-6">
@@ -206,16 +222,17 @@ function NavigationBar() {
             </Link>
 
             <Link
-              to="/sell"
+              to="/my-properties"
               onClick={() => setIsOpen(false)}
               className="text-gray-700 font-medium hover:text-sky-700 transition"
             >
-              Sell
+              My Property
             </Link>
+
 
             {/* Post Property Button */}
             <Link
-              to="/signup"
+              to={currentUser ? "/post-property" : "/signup"}
               onClick={() => setIsOpen(false)}
               className="bg-sky-800 text-white text-center py-2 rounded-lg font-semibold
                         hover:bg-sky-700 transition-all duration-300"
@@ -223,44 +240,97 @@ function NavigationBar() {
               Post Property
             </Link>
 
-            {/* Divider */}
+           {/* Divider */}
             <div className="border-t pt-4 flex flex-col gap-4">
 
-              {/* Register */}
-              <Link
-                to="/signup"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 group"
-              >
-                <div className="w-10 h-10 flex items-center justify-center rounded-full
-                                bg-green-100 group-hover:bg-green-600 transition">
-                  <UserPlus
-                    size={22}
-                    className="text-green-600 group-hover:text-white transition"
-                  />
-                </div>
-                <span className="font-medium text-gray-700 group-hover:text-green-600 transition">
-                  Register
-                </span>
-              </Link>
+              {currentUser ? (
+                  <>
+                    {/* Account */}
+                    <Link
+                      to="/profile"
+                      onClick={() => setIsOpen(false)}
+                      className="flex items-center gap-3 group"
+                    >
+                      <div
+                        className="w-10 h-10 flex items-center justify-center rounded-full
+                                  bg-purple-100 group-hover:bg-purple-600 transition"
+                      >
+                        <User
+                          size={22}
+                          className="text-purple-600 group-hover:text-white transition"
+                        />
+                      </div>
 
-              {/* Login */}
-              <Link
-                to="/signin"
-                onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 group"
-              >
-                <div className="w-10 h-10 flex items-center justify-center rounded-full
-                                bg-blue-100 group-hover:bg-sky-700 transition">
-                  <LogIn
-                    size={22}
-                    className="text-sky-700 group-hover:text-white transition"
-                  />
-                </div>
-                <span className="font-medium text-gray-700 group-hover:text-sky-700 transition">
-                  Login
-                </span>
-              </Link>
+                      <span className="font-medium text-gray-700 group-hover:text-purple-600 transition">
+                        Account
+                      </span>
+                    </Link>
+
+                    {/* Logout */}
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center gap-3 group w-full text-left"
+                    >
+                      <div
+                        className="w-10 h-10 flex items-center justify-center rounded-full
+                                  bg-red-100 group-hover:bg-red-600 transition"
+                      >
+                        <LogOut
+                          size={22}
+                          className="text-red-600 group-hover:text-white transition"
+                        />
+                      </div>
+
+                      <span className="font-medium text-gray-700 group-hover:text-red-600 transition">
+                        Logout
+                      </span>
+                    </button>
+                  </>
+                ) : (
+                <>
+                  {/* Register */}
+                  <Link
+                    to="/signup"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 group"
+                  >
+                    <div
+                      className="w-10 h-10 flex items-center justify-center rounded-full
+                                bg-green-100 group-hover:bg-green-600 transition"
+                    >
+                      <UserPlus
+                        size={22}
+                        className="text-green-600 group-hover:text-white transition"
+                      />
+                    </div>
+
+                    <span className="font-medium text-gray-700 group-hover:text-green-600 transition">
+                      Register
+                    </span>
+                  </Link>
+
+                  {/* Login */}
+                  <Link
+                    to="/signin"
+                    onClick={() => setIsOpen(false)}
+                    className="flex items-center gap-3 group"
+                  >
+                    <div
+                      className="w-10 h-10 flex items-center justify-center rounded-full
+                                bg-blue-100 group-hover:bg-sky-700 transition"
+                    >
+                      <LogIn
+                        size={22}
+                        className="text-sky-700 group-hover:text-white transition"
+                      />
+                    </div>
+
+                    <span className="font-medium text-gray-700 group-hover:text-sky-700 transition">
+                      Login
+                    </span>
+                  </Link>
+                </>
+              )}
 
             </div>
           </div>

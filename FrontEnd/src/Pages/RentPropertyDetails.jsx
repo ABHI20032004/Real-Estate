@@ -1,25 +1,54 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { properties } from "../data/rent_properties";
 
 function RentPropertyDetails() {
   const { id } = useParams();
 
-  const property = properties.find(
+  const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+  const staticProperty = properties.find(
     (item) => item.id === Number(id)
   );
 
+  if (staticProperty) {
+    setProperty(staticProperty);
+    setLoading(false);
+    return;
+  }
+
+  fetch(`${import.meta.env.VITE_API_URL}/BackEnd/properties/${id}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setProperty(data.property);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setLoading(false);
+    });
+}, [id]);
+
+  if (loading) {
+    return (
+      <div className="text-center mt-20 text-xl">
+        Loading...
+      </div>
+    );
+  }
+
   if (!property) {
     return (
-      <h1 className="text-center text-3xl mt-20">
+      <div className="text-center mt-20 text-3xl font-bold">
         Property Not Found
-      </h1>
+      </div>
     );
   }
 
   return (
-    <div className="max-w-6xl mx-auto py-24 px-6">
-
+    <div className=" mx-auto px-6 py-10 pt-24 bg-linear-to-r from-blue-200 via-cyan-200 to-yellow-50">
       <img
         src={property.image}
         alt={property.title}
@@ -35,13 +64,15 @@ function RentPropertyDetails() {
       </p>
 
       <p className="text-3xl font-bold text-blue-600 mt-4">
-        {property.price}
+        {property.price.startsWith("₹")
+          ? property.price
+          : `₹ ${property.price}`}
       </p>
 
       <div className="grid grid-cols-3 gap-6 mt-8 text-lg">
         <p>🛏 {property.bedrooms} Bedrooms</p>
         <p>🛁 {property.bathrooms} Bathrooms</p>
-        <p>📐 {property.area}</p>
+        <p>📐 {property.area} sqft</p>
       </div>
 
       <p className="mt-8 text-gray-700 leading-8">
@@ -61,7 +92,6 @@ function RentPropertyDetails() {
           Contact Owner
         </button>
       </div>
-
     </div>
   );
 }

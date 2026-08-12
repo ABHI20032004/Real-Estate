@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
-/* ================= DATA ================= */
 
 const headlines = [
   { title: "Find Your Dream Home", color: "text-blue-400" },
@@ -13,7 +12,8 @@ const headlines = [
 
 const videos = ["/v2.mp4", "/v1.mp4", "/v2.mp4", "/v3.mp4"];
 
-/* ================= COMPONENT ================= */
+
+////  Components
 
 function Dashboard() {
   const [textIndex, setTextIndex] = useState(0);
@@ -104,7 +104,7 @@ const title = "Homes That Define Modern Living";
 
   return (
     <>
-      {/* ================= HERO ================= */}
+      {/*  HERO Section*/}
       <div className="relative w-full h-screen overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.video
@@ -160,7 +160,7 @@ const title = "Homes That Define Modern Living";
         </div>
       </div>
 
-      {/* ================= FEATURED PROPERTIES ================= */}
+      {/* FEATURED PROPERTIES  */}
       <div className="pt-5 pb-2 px-4 bg-white">
 
           {/* Animated Heading */}
@@ -197,7 +197,7 @@ const title = "Homes That Define Modern Living";
                 ease: "linear",
               }}
             >
-              Properties for Sell &nbsp; • &nbsp; Properties for Sell &nbsp; • &nbsp; Properties for Sell &nbsp; • &nbsp; Properties for Sell &nbsp;• &nbsp; Properties for Sell &nbsp;
+              Properties for Sell &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Properties for Sell &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Properties for Sell
             </motion.p>
       </div>
       <div className=" p-8 rounded-b-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8  bg-linear-to-r from-blue-200 via-cyan-200 to-yellow-50 animate-gradient">
@@ -264,7 +264,7 @@ const title = "Homes That Define Modern Living";
                 ease: "linear",
               }}
             >
-              Properties for Rent &nbsp; • &nbsp; Properties for Rent &nbsp; • &nbsp; Properties for Rent &nbsp; • &nbsp; Properties for Rent &nbsp;• &nbsp; Properties for Rent &nbsp;
+              Properties for Rent  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Properties for Rent  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; Properties for Rent
             </motion.p>
       </div>
       <div className="mb-5 p-8 rounded-b-2xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8  bg-linear-to-r from-blue-200 via-cyan-200 to-yellow500 ">

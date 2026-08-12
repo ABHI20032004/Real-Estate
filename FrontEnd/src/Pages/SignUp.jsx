@@ -25,7 +25,7 @@ function SignUp() {
     try {
       setLoading(true);
 
-      const res = await fetch("/BackEnd/auth/signup", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/BackEnd/auth/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -148,7 +148,7 @@ function SignUp() {
           >
             {loading ? "Signing up..." : "Sign Up"}
           </button>
-          {/* <OAuth/> */}
+
         </form>
 
         {/* Footer */}

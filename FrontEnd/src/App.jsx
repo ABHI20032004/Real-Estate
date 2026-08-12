@@ -6,11 +6,12 @@ import SignIn from "./Pages/SignIn"
 import Profile from "./Pages/Profile"
 import Buy from "./Pages/Buy"
 import Rent from "./Pages/Rent"
-import Sell from "./Pages/Sell"
+import PostProperty from "./Pages/PostProperty"
 import SignUp from "./Pages/SignUp"
 import PrivateRoute from "./Components/PrivateRoute"
 import BuyPropertyDetails from "./Pages/BuyPropertyDetails"
 import RentPropertyDetails from "./Pages/RentPropertyDetails"
+import MyProperties from "./Pages/MyProperties"
 
 
 
@@ -29,9 +30,10 @@ function App() {
             
             <Route path="/buy" element={<Buy/>}/>
             <Route path="/rent" element={<Rent/>}/>
-            <Route path="/sell" element={<Sell/>}/>
+            <Route path="/post-property" element={<PostProperty/>}/>
             <Route path="/buy-property/:id" element={<BuyPropertyDetails />} />
             <Route path="/rent-property/:id" element={<RentPropertyDetails />} /> 
+            <Route path="/my-properties" element={<MyProperties />} /> 
 
             <Route element={<PrivateRoute/>}>
               <Route path="/profile" element={<Profile/>} />
