@@ -1,68 +1,110 @@
 import User from "../models/user.models.js";
+import bcryptjs from "bcryptjs";
 
-/* ================= TEST ================= */
-export const test = (req, res) => {
-  res.send("Test route being called!!!");
+/// UPDATE USER 
+export const updateUser = async (req, res) => {
+  try {
+    const {
+      username,
+      email,
+      photo,
+      bio,
+      password,
+    } = req.body;
+
+    const updateData = {};
+
+    if (username !== undefined && username.trim() !== "") {
+      updateData.username = username.trim();
+    }
+
+    if (email !== undefined && email.trim() !== "") {
+      updateData.email = email.trim();
+    }
+
+    if (photo !== undefined) {
+      updateData.photo = photo;
+    }
+
+    if (bio !== undefined) {
+      updateData.bio = bio;
+    }
+
+    // Hash password if user entered a new password
+    if (password && password.trim() !== "") {
+      const hashedPassword = await bcryptjs.hash(password, 10);
+      updateData.password = hashedPassword;
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: updateData },
+      {
+        new: true,
+        runValidators: true,
+      }
+    ).select("-password");
+
+    if (!updatedUser) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Account updated successfully",
+      user: updatedUser,
+    });
+
+  } catch (error) {
+    console.error("UPDATE USER ERROR:", error);
+
+    // Duplicate username/email
+    if (error.code === 11000) {
+      const field = Object.keys(error.keyPattern)[0];
+
+      return res.status(400).json({
+        success: false,
+        message: `${field} already exists`,
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
 };
 
-/* ================= UPDATE USER ================= */
-// export const updateUser = async (req, res, next) => {
-//   try {
-//     const updateData = {};
+// DELETE USER
+export const deleteUser = async (req, res) => {
+  try {
+    console.log("DELETE USER ID:", req.params.id);
 
-//     if (req.body.username) updateData.username = req.body.username;
-//     if (req.body.email) updateData.email = req.body.email;
-//     if (req.body.photo) updateData.photo = req.body.photo;
-//     if (req.body.bio) updateData.bio = req.body.bio;
+    const user = await User.findByIdAndDelete(req.params.id);
 
-//     // ❗ Password updated ONLY if provided
-//     if (req.body.password && req.body.password.trim() !== "") {
-//       updateData.password = req.body.password;
-//     }
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
 
-//     const updatedUser = await User.findByIdAndUpdate(
-//       req.params.id,
-//       { $set: updateData },
-//       { new: true }
-//     );
+    res.clearCookie("access_token");
 
-//     if (!updatedUser) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
+    res.status(200).json({
+      success: true,
+      message: "Account deleted successfully",
+    });
 
-//     const { password, ...rest } = updatedUser._doc;
-//     res.status(200).json(rest);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+  } catch (error) {
+    console.error("DELETE USER ERROR:", error);
 
-// /* ================= DELETE USER ================= */
-// export const deleteUser = async (req, res, next) => {
-//   try {
-//     const user = await User.findByIdAndDelete(req.params.id);
-
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-
-//     res.clearCookie("access_token");
-//     res.status(200).json({ message: "User has been deleted" });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
-/* ================= GET USER PROFILE ================= */
-// export const getUserProfile = async (req, res, next) => {
-//   try {
-//     const user = await User.findById(req.user.id).select("-password");
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" });
-//     }
-//     res.status(200).json(user);
-//   } catch (error) {
-//     next(error);
-//   }
-// }
-
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
