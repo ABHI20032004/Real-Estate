@@ -207,7 +207,7 @@ const title = "Homes That Define Modern Living";
             className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
           >
             {/* IMAGE DIV */}
-            <a href="">
+            <a href="/buy">
             <div className="h-78 w-full">
               <img
                 src={property.image}
@@ -274,7 +274,7 @@ const title = "Homes That Define Modern Living";
             className="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition bg-white"
           >
             {/* IMAGE DIV */}
-            <a href="">
+            <a href="/rent">
             <div className="h-78 w-full">
               <img
                 src={property.image}
