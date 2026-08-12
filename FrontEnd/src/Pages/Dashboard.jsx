@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link ,useNavigate} from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -33,6 +34,8 @@ function Dashboard() {
     setTextIndex((p) => (p - 1 + headlines.length) % headlines.length);
     setVideoIndex((p) => (p - 1 + videos.length) % videos.length);
   };
+
+  const navigate = useNavigate();
 
   const properties_buy = [
   {
@@ -101,6 +104,7 @@ function Dashboard() {
 ];
 
 const title = "Homes That Define Modern Living";
+
 
   return (
     <>
@@ -233,8 +237,12 @@ const title = "Homes That Define Modern Living";
         ))}
           <div className="overflow-hidden flex justify-center items-center">
             <motion.a
-              href="/buy"
-              className="block max-w-sm p-6 rounded-2xl cursor-pointer text-white shadow-lg text-2xl"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/buy");
+              }}
+              className="block max-w-sm p-6 rounded-2xl cursor-pointer text-white font-bold shadow-lg text-2xl"
               animate={{
                 y: [20, -23 ,20], // vertical motion
                 color: ["#000000", "#38bdf8", "#facc15", "#000000"], // color loop
@@ -300,8 +308,12 @@ const title = "Homes That Define Modern Living";
         ))}
           <div className="overflow-hidden flex justify-center items-center">
             <motion.a
-              href="/rent"
-              className="block max-w-sm p-6 rounded-2xl cursor-pointer text-white shadow-lg text-2xl"
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/rent");
+              }}
+              className="block max-w-sm p-6 rounded-2xl cursor-pointer text-white font-bold shadow-lg text-2xl"
               animate={{
                 y: [20, -23 ,20], // vertical motion
                 color: ["#000000", "#38bdf8", "#facc15", "#000000"], // color loop
